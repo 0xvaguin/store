@@ -63,16 +63,21 @@ export function ProductCard({ product, className }: ProductCardProps) {
   }
 
   return (
-    <article className={cn("group flex flex-col", className)}>
+    <article
+      className={cn(
+        "group flex flex-col rounded-none border border-border bg-card transition-transform duration-100 ease-out active:scale-[0.98]",
+        className
+      )}
+    >
       <Link
         href={`/produtos/${product.slug}`}
-        className="relative aspect-[3/4] w-full overflow-hidden rounded-none bg-muted"
+        className="relative aspect-[3/4] w-full overflow-hidden rounded-none border-b border-border bg-background"
       >
         <img
           src={primaryImage}
           alt={product.name}
           loading="lazy"
-          className="h-full w-full object-cover transition-all duration-500 group-hover:scale-[1.03]"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
         {secondaryImage !== primaryImage && (
           <img
@@ -82,66 +87,62 @@ export function ProductCard({ product, className }: ProductCardProps) {
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           />
         )}
+      </Link>
 
-        {/* Single Subtle Badge */}
-        <div className="absolute top-2.5 left-2.5">
+      <div className="flex flex-1 flex-col gap-[15px] p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[10px] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+            {product.categoryName}
+          </span>
           {isOutOfStock ? (
-            <Badge
-              variant="destructive"
-              className="rounded-none px-2 py-0.5 text-[10px] tracking-wider uppercase"
-            >
-              Esgotado
-            </Badge>
+            <Badge variant="destructive">Esgotado</Badge>
           ) : discountPercent !== null ? (
-            <Badge className="rounded-none bg-foreground px-2 py-0.5 text-[10px] tracking-wider text-background uppercase">
+            <Badge className="bg-foreground text-background">
               -{discountPercent}%
             </Badge>
           ) : product.isNew ? (
-            <Badge
-              variant="secondary"
-              className="rounded-none bg-background/95 px-2 py-0.5 text-[10px] tracking-wider text-foreground uppercase backdrop-blur"
-            >
-              NOVO
-            </Badge>
+            <Badge variant="cobalt">NOVO</Badge>
           ) : null}
         </div>
 
-        {/* Quick Add on Hover */}
-        {!isOutOfStock && (
-          <button
-            type="button"
-            onClick={handleQuickAdd}
-            className="absolute right-2.5 bottom-2.5 left-2.5 flex h-9 translate-y-1 items-center justify-center gap-1.5 rounded-none bg-background/95 px-3 text-[11px] font-medium tracking-[0.14em] text-foreground uppercase opacity-0 transition-all duration-200 hover:bg-primary hover:text-primary-foreground group-hover:translate-y-0 group-hover:opacity-100"
-          >
-            <ShoppingBag className="size-3.5" />
-            <span>{hasVariants ? "Compra Rápida" : "Adicionar"}</span>
-          </button>
-        )}
-      </Link>
-
-      <div className="mt-3 flex flex-1 flex-col space-y-1">
         <Link
           href={`/produtos/${product.slug}`}
-          className="line-clamp-1 text-xs font-normal tracking-wide text-foreground transition-colors hover:text-muted-foreground sm:text-sm"
+          className="line-clamp-1 text-xs font-semibold tracking-normal text-foreground transition-colors hover:text-brand-accent sm:text-sm"
         >
           {product.name}
         </Link>
 
-        <div className="flex items-baseline gap-2">
-          <span className="text-sm font-medium tracking-tight text-foreground">
-            {formatBRL(product.price)}
-          </span>
-          {product.compareAtPrice && product.compareAtPrice > product.price && (
-            <span className="text-xs text-muted-foreground line-through">
-              {formatBRL(product.compareAtPrice)}
+        <div className="mt-auto space-y-1">
+          <div className="flex items-baseline gap-2">
+            <span className="font-mono text-sm font-bold tracking-tight text-foreground">
+              {formatBRL(product.price)}
             </span>
-          )}
-        </div>
+            {product.compareAtPrice && product.compareAtPrice > product.price && (
+              <span className="font-mono text-xs text-muted-foreground line-through">
+                {formatBRL(product.compareAtPrice)}
+              </span>
+            )}
+          </div>
 
-        <p className="text-[11px] text-muted-foreground">
-          {formatBRL(pixPrice)} no Pix · até {installments.count}x
-        </p>
+          <p className="text-[11px] text-muted-foreground">
+            <span className="font-mono font-bold text-foreground">
+              {formatBRL(pixPrice)}
+            </span>{" "}
+            no Pix · até {installments.count}x
+          </p>
+        </div>
       </div>
+
+      {!isOutOfStock && (
+        <button
+          type="button"
+          onClick={handleQuickAdd}
+          className="flex h-10 w-full items-center justify-center gap-2 rounded-none border-t border-border bg-card px-3 text-[11px] font-semibold tracking-[0.12em] text-foreground uppercase transition-[transform,color,background-color] duration-100 ease-out active:scale-[0.98] hover:bg-cobalt hover:text-cobalt-foreground"
+        >
+          <ShoppingBag className="size-3.5" />
+          <span>{hasVariants ? "Compra Rápida" : "Adicionar"}</span>
+        </button>
+      )}
     </article>
   );
 }

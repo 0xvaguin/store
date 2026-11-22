@@ -456,6 +456,211 @@ export const MOCK_PRODUCTS: Product[] = [
       Ferragem: "Zamac com banho níquel escovado",
     },
   },
+  {
+    id: "prod-9",
+    slug: "vestido-longo-linho-estruturado",
+    name: "Vestido Longo Linho Estruturado",
+    shortDescription:
+      "Decote reto minimalista com recortes arquitetônicos e fenda lateral discreta.",
+    description:
+      "Confeccionado em linho puro de gramatura média, o Vestido Longo Estruturado valoriza o caimento vertical com cintura levemente marcada e zíper invisível nas costas.",
+    price: 479.9,
+    images: [
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=80",
+    ],
+    categoryId: "cat-2",
+    categorySlug: "vestidos",
+    categoryName: "Vestidos",
+    tags: ["vestido", "linho", "longo"],
+    featured: true,
+    isNew: true,
+    stock: 15,
+    specifications: {
+      Composição: "100% Linho Europeu",
+      Origem: "Produzido em São Paulo, Brasil",
+      Modelagem: "Coluna Reta Estruturada",
+    },
+    variants: [
+      {
+        id: "v-9-areia-p",
+        sku: "AUR-VSL-ARE-P",
+        attributes: { Cor: "Areia", Tamanho: "P" },
+        stock: 4,
+      },
+      {
+        id: "v-9-areia-m",
+        sku: "AUR-VSL-ARE-M",
+        attributes: { Cor: "Areia", Tamanho: "M" },
+        stock: 4,
+      },
+      {
+        id: "v-9-areia-g",
+        sku: "AUR-VSL-ARE-G",
+        attributes: { Cor: "Areia", Tamanho: "G" },
+        stock: 2,
+      },
+      {
+        id: "v-9-preto-p",
+        sku: "AUR-VSL-PRT-P",
+        attributes: { Cor: "Preto", Tamanho: "P" },
+        stock: 3,
+      },
+      {
+        id: "v-9-preto-m",
+        sku: "AUR-VSL-PRT-M",
+        attributes: { Cor: "Preto", Tamanho: "M" },
+        stock: 2,
+      },
+    ],
+  },
+  {
+    id: "prod-10",
+    slug: "colete-alfaiataria-la-fria",
+    name: "Colete Alfaiataria Lã Fria",
+    shortDescription:
+      "Corte alongado sem mangas com abotoamento frontal e forro acetinado.",
+    description:
+      "Peça versátil de alfaiataria para usar fechada sobre a pele ou em sobreposições com camisa de tricoline. Construído em lã fria respirável com acabamento de costura interna em viés.",
+    price: 329.9,
+    compareAtPrice: 389.9,
+    images: [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=80",
+    ],
+    categoryId: "cat-1",
+    categorySlug: "alfaiataria",
+    categoryName: "Alfaiataria",
+    tags: ["colete", "alfaiataria", "lã fria"],
+    featured: true,
+    stock: 19,
+    specifications: {
+      Composição: "80% Lã Fria, 20% Poliamida",
+      Origem: "Produzido em São Paulo, Brasil",
+      Modelagem: "Reta Alongada",
+    },
+    variants: [
+      {
+        id: "v-10-preto-pp",
+        sku: "AUR-COL-PRT-PP",
+        attributes: { Cor: "Preto", Tamanho: "PP" },
+        stock: 3,
+      },
+      {
+        id: "v-10-preto-p",
+        sku: "AUR-COL-PRT-P",
+        attributes: { Cor: "Preto", Tamanho: "P" },
+        stock: 5,
+      },
+      {
+        id: "v-10-preto-m",
+        sku: "AUR-COL-PRT-M",
+        attributes: { Cor: "Preto", Tamanho: "M" },
+        stock: 4,
+      },
+      {
+        id: "v-10-preto-g",
+        sku: "AUR-COL-PRT-G",
+        attributes: { Cor: "Preto", Tamanho: "G" },
+        stock: 2,
+      },
+      {
+        id: "v-10-areia-p",
+        sku: "AUR-COL-ARE-P",
+        attributes: { Cor: "Areia", Tamanho: "P" },
+        stock: 3,
+      },
+      {
+        id: "v-10-areia-m",
+        sku: "AUR-COL-ARE-M",
+        attributes: { Cor: "Areia", Tamanho: "M" },
+        stock: 2,
+      },
+    ],
+  },
+  {
+    id: "prod-11",
+    slug: "sueter-algodao-pima-decote-v",
+    name: "Suéter Algodão Pima Decote V",
+    shortDescription:
+      "Malha leve de fio penteado com ombros deslocados e punhos canelados.",
+    description:
+      "Tricotado com algodão pima peruano de fibra extralonga, oferece toque macio, resistência a bolinhas e caimento fluido para todas as estações.",
+    price: 289.9,
+    images: [
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80",
+    ],
+    categoryId: "cat-3",
+    categorySlug: "tricot-malhas",
+    categoryName: "Tricot & Malhas",
+    tags: ["suéter", "algodão pima", "tricot"],
+    featured: false,
+    isNew: true,
+    stock: 17,
+    specifications: {
+      Composição: "100% Algodão Pima",
+      Origem: "Produzido na Serra Gaúcha, Brasil",
+      Modelagem: "Relaxada Contemporânea",
+    },
+    variants: [
+      {
+        id: "v-11-oliva-p",
+        sku: "AUR-SUE-OLV-P",
+        attributes: { Cor: "Oliva", Tamanho: "P" },
+        stock: 4,
+      },
+      {
+        id: "v-11-oliva-m",
+        sku: "AUR-SUE-OLV-M",
+        attributes: { Cor: "Oliva", Tamanho: "M" },
+        stock: 5,
+      },
+      {
+        id: "v-11-oliva-g",
+        sku: "AUR-SUE-OLV-G",
+        attributes: { Cor: "Oliva", Tamanho: "G" },
+        stock: 2,
+      },
+      {
+        id: "v-11-off-p",
+        sku: "AUR-SUE-OFF-P",
+        attributes: { Cor: "Off-White", Tamanho: "P" },
+        stock: 3,
+      },
+      {
+        id: "v-11-off-m",
+        sku: "AUR-SUE-OFF-M",
+        attributes: { Cor: "Off-White", Tamanho: "M" },
+        stock: 3,
+      },
+    ],
+  },
+  {
+    id: "prod-12",
+    slug: "carteira-envelope-couro-puro",
+    name: "Carteira Envelope Couro Puro",
+    shortDescription:
+      "Formato geométrico slim em couro liso com fecho de pressão oculto.",
+    description:
+      "Produzida artesanalmente em couro bovino de curtimento vegetal, comporta cartões, documentos e cédulas dobradas com perfil ultrafino.",
+    price: 219.9,
+    images: [
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80",
+    ],
+    categoryId: "cat-4",
+    categorySlug: "acessorios",
+    categoryName: "Acessórios",
+    tags: ["carteira", "couro", "acessorio"],
+    featured: false,
+    stock: 15,
+    specifications: {
+      Material: "100% Couro Bovino Curtimento Vegetal",
+      Dimensões: "19cm (L) × 10cm (A) × 1,5cm (P)",
+      Origem: "Feito à mão no Brasil",
+    },
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {

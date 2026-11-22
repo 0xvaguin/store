@@ -30,6 +30,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductCard } from "@/components/product/product-card";
 import { SizeGuideModal } from "@/components/product/size-guide-modal";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 interface PdpClientProps {
@@ -310,7 +311,10 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
         <div className="lg:col-span-7">
           <div className="flex flex-col gap-3 sm:flex-row-reverse sm:gap-4">
             {/* Main Image */}
-            <div className="relative aspect-[3/4] w-full flex-1 overflow-hidden rounded-xl bg-muted">
+            <Reveal
+              variant="image"
+              className="relative aspect-[3/4] w-full flex-1 overflow-hidden rounded-none border border-border bg-card"
+            >
               {activeImage && (
                 <img
                   src={activeImage}
@@ -318,25 +322,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                   className="h-full w-full object-cover"
                 />
               )}
-
-              {/* Badges */}
-              <div className="absolute top-3 left-3">
-                {isOutOfStock ? (
-                  <Badge variant="destructive">Esgotado</Badge>
-                ) : discountPercent !== null ? (
-                  <Badge className="bg-foreground text-background">
-                    -{discountPercent}%
-                  </Badge>
-                ) : product.isNew ? (
-                  <Badge
-                    variant="secondary"
-                    className="bg-background/95 text-foreground backdrop-blur"
-                  >
-                    NOVO
-                  </Badge>
-                ) : null}
-              </div>
-            </div>
+            </Reveal>
 
             {/* Thumbnail Strip */}
             {product.images.length > 1 && (
@@ -351,9 +337,9 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                       aria-label={`Ver imagem ${idx + 1} de ${product.name}`}
                       aria-pressed={isActive}
                       className={cn(
-                        "relative aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-lg border bg-muted transition-all sm:w-full",
+                        "relative aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-none border bg-muted transition-all sm:w-full",
                         isActive
-                          ? "border-foreground ring-2 ring-foreground/20"
+                          ? "border-brand-accent"
                           : "border-border opacity-75 hover:opacity-100"
                       )}
                     >
@@ -372,16 +358,27 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
 
         {/* Product Info & Purchase Column */}
         <div className="flex flex-col lg:col-span-5">
-          {/* Category & SKU */}
-          <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
-            <span className="font-medium tracking-[0.12em] uppercase">
-              {product.categoryName}
-            </span>
+          {/* Category, Status & SKU */}
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2.5">
+              <span className="font-semibold tracking-[0.12em] uppercase">
+                {product.categoryName}
+              </span>
+              {isOutOfStock ? (
+                <Badge variant="destructive">Esgotado</Badge>
+              ) : discountPercent !== null ? (
+                <Badge className="bg-foreground text-background">
+                  -{discountPercent}%
+                </Badge>
+              ) : product.isNew ? (
+                <Badge variant="cobalt">NOVO</Badge>
+              ) : null}
+            </div>
             <span className="font-mono text-[11px]">SKU: {activeSku}</span>
           </div>
 
           {/* Title */}
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <h1 className="mt-2 font-heading text-2xl leading-[1.06] font-bold tracking-[-0.03em] text-foreground sm:text-3xl">
             {product.name}
           </h1>
 
@@ -394,33 +391,34 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
           {/* Pricing Block */}
           <div className="mt-5 space-y-2 border-y py-5">
             <div className="flex flex-wrap items-baseline gap-2.5">
-              <span className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              <span className="font-mono text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 {formatBRL(activePrice)}
               </span>
               {product.compareAtPrice && product.compareAtPrice > activePrice && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="font-mono text-sm text-muted-foreground line-through">
                   {formatBRL(product.compareAtPrice)}
                 </span>
               )}
               {discountPercent !== null && (
                 <span className="text-xs font-semibold text-[var(--brand-accent)]">
-                  Economize {discountPercent}%
+                  Economize <span className="font-mono">{discountPercent}%</span>
                 </span>
               )}
             </div>
 
             {/* Highlighted Pix Box */}
-            <div className="flex items-center gap-2.5 rounded-lg border border-[var(--brand-accent)]/30 bg-[var(--brand-accent)]/8 px-3.5 py-2.5">
+            <div className="flex items-center gap-2.5 rounded-none border border-[var(--brand-accent)]/40 bg-[var(--brand-accent)]/8 px-3.5 py-2.5">
               <Sparkles className="size-4 shrink-0 text-[var(--brand-accent)]" />
               <p className="text-sm font-semibold text-[var(--brand-accent)]">
-                {formatBRL(pixPrice)} no Pix — {storeConfig.pixDiscountPercent}%
+                <span className="font-mono">{formatBRL(pixPrice)}</span> no Pix —{" "}
+                <span className="font-mono">{storeConfig.pixDiscountPercent}%</span>{" "}
                 OFF
               </p>
             </div>
 
             <p className="text-xs text-muted-foreground">
               ou até{" "}
-              <strong className="font-medium text-foreground">
+              <strong className="font-mono font-bold text-foreground">
                 {installments.count}x de {formatBRL(installments.value)}
               </strong>{" "}
               sem juros no cartão de crédito
@@ -468,9 +466,9 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                             aria-pressed={isSelected}
                             title={isUnavailable ? "Esgotado" : val}
                             className={cn(
-                              "relative inline-flex min-w-[2.75rem] items-center justify-center rounded-md border px-3.5 py-2 text-xs font-medium transition-all",
+                              "relative inline-flex min-w-[2.75rem] items-center justify-center rounded-none border px-3.5 py-2 text-xs font-semibold transition-all",
                               isSelected && !isUnavailable
-                                ? "border-foreground bg-primary text-primary-foreground shadow-xs"
+                                ? "border-foreground bg-primary text-primary-foreground"
                                 : !isUnavailable
                                   ? "border-border bg-background text-foreground hover:border-foreground/60 hover:bg-muted/50"
                                   : "cursor-not-allowed border-border/60 bg-muted/40 text-muted-foreground/60 line-through opacity-65"
@@ -499,22 +497,22 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
             ) : !hasVariants ? (
               <span className="inline-flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400">
                 <Check className="size-3.5" />
-                Em estoque — {product.stock} unidades
+                Em estoque — <span className="font-mono">{product.stock}</span> unidades
                 {product.stock <= 4 && (
                   <span className="text-[var(--brand-accent)]">
-                    (Últimas {product.stock} unidades!)
+                    (Últimas <span className="font-mono">{product.stock}</span> unidades!)
                   </span>
                 )}
               </span>
             ) : availableStock <= 4 ? (
               <span className="font-semibold text-[var(--brand-accent)]">
-                Últimas {availableStock}{" "}
+                Últimas <span className="font-mono">{availableStock}</span>{" "}
                 {availableStock === 1 ? "unidade!" : "unidades!"}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400">
                 <Check className="size-3.5" />
-                Em estoque
+                Em estoque (<span className="font-mono">{availableStock}</span>)
               </span>
             )}
           </div>
@@ -524,19 +522,19 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
             ref={ctaContainerRef}
             className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <div className="inline-flex h-11 items-center justify-between rounded-lg border bg-background px-1 sm:w-32">
+            <div className="inline-flex h-11 items-center justify-between rounded-none border border-border bg-background px-1 sm:w-32">
               <button
                 type="button"
                 onClick={handleDecrement}
                 disabled={isOutOfStock || effectiveQuantity <= 1}
                 aria-label="Diminuir quantidade"
-                className="inline-flex size-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex size-9 items-center justify-center rounded-none text-foreground transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
               >
                 <Minus className="size-4" />
               </button>
               <span
                 aria-live="polite"
-                className="min-w-8 text-center text-sm font-medium tabular-nums"
+                className="min-w-8 text-center font-mono text-sm font-bold tabular-nums"
               >
                 {effectiveQuantity}
               </span>
@@ -545,7 +543,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                 onClick={handleIncrement}
                 disabled={isOutOfStock || effectiveQuantity >= availableStock}
                 aria-label="Aumentar quantidade"
-                className="inline-flex size-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex size-9 items-center justify-center rounded-none text-foreground transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
               >
                 <Plus className="size-4" />
               </button>
@@ -553,6 +551,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
 
             <Button
               type="button"
+              variant="cobalt"
               size="lg"
               data-testid="add-to-cart-button"
               disabled={isOutOfStock}
@@ -567,7 +566,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
           </div>
 
           {/* Mocked CEP Shipping Estimator */}
-          <div className="mt-6 rounded-xl border bg-card p-4">
+          <div className="mt-6 rounded-none border border-border bg-card p-4">
             <div className="mb-2.5 flex items-center gap-2 text-xs font-semibold tracking-wider text-foreground uppercase">
               <Truck className="size-4 text-[var(--brand-accent)]" />
               <span>Calcular Frete e Prazo</span>
@@ -609,10 +608,10 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                       type="button"
                       onClick={() => setStoredShipping(quote)}
                       className={cn(
-                        "flex w-full items-center justify-between rounded-lg border bg-background px-3 py-2.5 text-left text-xs transition-colors",
+                        "flex w-full items-center justify-between rounded-none border bg-background px-3 py-2.5 text-left text-xs transition-colors",
                         isSelected
-                          ? "border-primary ring-1 ring-primary/30"
-                          : "hover:border-foreground/30"
+                          ? "border-primary"
+                          : "hover:border-foreground/50"
                       )}
                     >
                       <div>
@@ -625,7 +624,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
                       </div>
                       <span
                         className={cn(
-                          "font-semibold",
+                          "font-mono font-bold",
                           quote.price === 0
                             ? "text-emerald-700 dark:text-emerald-400"
                             : "text-foreground"
@@ -641,17 +640,20 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
 
             <p className="mt-2.5 text-[11px] text-muted-foreground">
               Frete PAC grátis nas compras acima de{" "}
-              {formatBRL(storeConfig.freeShippingThreshold)}.
+              <span className="font-mono font-medium text-foreground">
+                {formatBRL(storeConfig.freeShippingThreshold)}
+              </span>
+              .
             </p>
           </div>
 
           {/* Trust Micro-signals */}
           <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-muted-foreground">
-            <div className="flex items-center gap-2 rounded-lg border bg-secondary/30 px-3 py-2">
+            <div className="flex items-center gap-2 rounded-none border border-border bg-card px-3 py-2">
               <RotateCcw className="size-4 shrink-0 text-foreground" />
               <span>1ª troca grátis em até 7 dias</span>
             </div>
-            <div className="flex items-center gap-2 rounded-lg border bg-secondary/30 px-3 py-2">
+            <div className="flex items-center gap-2 rounded-none border border-border bg-card px-3 py-2">
               <ShieldCheck className="size-4 shrink-0 text-foreground" />
               <span>Compra 100% segura</span>
             </div>
@@ -709,7 +711,7 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
           <TabsContent value="especificacoes" className="pt-6">
             {product.specifications &&
             Object.keys(product.specifications).length > 0 ? (
-              <div className="max-w-2xl overflow-hidden rounded-lg border">
+              <div className="max-w-2xl overflow-hidden rounded-none border border-border">
                 <dl className="divide-y text-sm">
                   {Object.entries(product.specifications).map(([key, val]) => (
                     <div
@@ -774,10 +776,10 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
         <section className="mt-14 border-t pt-10">
           <div className="mb-6 flex items-end justify-between gap-4">
             <div>
-              <span className="text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
+              <span className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">
                 Curadoria {storeConfig.brandName}
               </span>
-              <h2 className="mt-1 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+              <h2 className="mt-1 font-heading text-xl leading-[1.08] font-bold tracking-[-0.03em] text-foreground sm:text-2xl">
                 Você também pode gostar
               </h2>
             </div>
@@ -789,34 +791,41 @@ export function PdpClient({ product, relatedProducts }: PdpClientProps) {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 lg:grid-cols-4">
+          <Reveal
+            variant="grid"
+            className="grid grid-cols-2 gap-[15px] lg:grid-cols-4"
+          >
             {relatedProducts.map((related) => (
               <ProductCard key={related.id} product={related} />
             ))}
-          </div>
+          </Reveal>
         </section>
       )}
 
       {/* Sticky Mobile Buy Bar */}
       {showStickyBar && (
-        <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur md:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background px-4 py-3 md:hidden">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <p className="truncate text-xs font-medium text-foreground">
+              <p className="truncate text-xs font-semibold text-foreground">
                 {product.name}
               </p>
               <div className="flex items-baseline gap-2">
-                <span className="text-sm font-semibold text-foreground">
+                <span className="font-mono text-sm font-bold text-foreground">
                   {formatBRL(activePrice)}
                 </span>
                 <span className="text-[11px] font-medium text-[var(--brand-accent)]">
-                  {formatBRL(pixPrice)} no Pix
+                  <span className="font-mono font-bold">
+                    {formatBRL(pixPrice)}
+                  </span>{" "}
+                  no Pix
                 </span>
               </div>
             </div>
 
             <Button
               type="button"
+              variant="cobalt"
               size="lg"
               disabled={isOutOfStock}
               onClick={handleAddToCart}

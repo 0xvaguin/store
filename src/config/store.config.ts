@@ -62,6 +62,14 @@ export const storeConfig: StoreConfig = {
       subtitle: "Até 7 dias após o recebimento",
     },
   ],
+  theme: {
+    canvas: "#F9F6F2",
+    surface: "#ECECED",
+    ink: "#0E0E0E",
+    border: "#868686",
+    brandAccent: "#892500",
+    urgencyAccent: "#000aff",
+  },
 };
 
 export function formatBRL(value: number): string {

@@ -13,7 +13,7 @@ export default function CheckoutLayout({
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="text-xl font-semibold tracking-[0.22em] text-foreground uppercase transition-opacity hover:opacity-80 sm:text-2xl"
+            className="text-xl font-semibold tracking-[0.22em] text-brand-accent uppercase transition-opacity hover:opacity-80 sm:text-2xl"
           >
             {storeConfig.logoText}
           </Link>

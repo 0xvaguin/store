@@ -131,16 +131,16 @@ function FilterPanel({
             type="button"
             onClick={() => onCategoryChange("all")}
             className={cn(
-              "flex items-center justify-between rounded-md px-2.5 py-1.5 text-left text-sm transition-colors",
+              "flex items-center justify-between rounded-none px-2.5 py-1.5 text-left text-sm transition-colors",
               selectedCategory === "all"
-                ? "bg-primary font-medium text-primary-foreground"
+                ? "bg-primary font-semibold text-primary-foreground"
                 : "text-foreground hover:bg-muted"
             )}
           >
             <span>Todas</span>
             <span
               className={cn(
-                "text-xs",
+                "font-mono text-xs",
                 selectedCategory === "all"
                   ? "text-primary-foreground/80"
                   : "text-muted-foreground"
@@ -160,16 +160,16 @@ function FilterPanel({
                 type="button"
                 onClick={() => onCategoryChange(category.slug)}
                 className={cn(
-                  "flex items-center justify-between rounded-md px-2.5 py-1.5 text-left text-sm transition-colors",
+                  "flex items-center justify-between rounded-none px-2.5 py-1.5 text-left text-sm transition-colors",
                   isSelected
-                    ? "bg-primary font-medium text-primary-foreground"
+                    ? "bg-primary font-semibold text-primary-foreground"
                     : "text-foreground hover:bg-muted"
                 )}
               >
                 <span>{category.name}</span>
                 <span
                   className={cn(
-                    "text-xs",
+                    "font-mono text-xs",
                     isSelected
                       ? "text-primary-foreground/80"
                       : "text-muted-foreground"
@@ -198,7 +198,7 @@ function FilterPanel({
                 onClick={() => onSizeChange(isSelected ? null : size)}
                 aria-pressed={isSelected}
                 className={cn(
-                  "flex h-9 items-center justify-center rounded-md border text-xs font-medium transition-colors",
+                  "flex h-9 items-center justify-center rounded-none border text-xs font-semibold transition-colors",
                   isSelected
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-background text-foreground hover:border-foreground/40 hover:bg-muted/60"
@@ -259,9 +259,9 @@ function FilterPanel({
                 type="button"
                 onClick={() => onPriceRangeChange(option.value)}
                 className={cn(
-                  "rounded-md px-2.5 py-1.5 text-left text-sm transition-colors",
+                  "rounded-none px-2.5 py-1.5 text-left text-sm transition-colors",
                   isSelected
-                    ? "bg-primary font-medium text-primary-foreground"
+                    ? "bg-primary font-semibold text-primary-foreground"
                     : "text-foreground hover:bg-muted"
                 )}
               >
@@ -489,10 +489,10 @@ export function CatalogClient() {
     <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
       {/* Cabeçalho da Página */}
       <div className="mb-8 border-b pb-6">
-        <p className="text-[10px] font-medium tracking-[0.2em] text-muted-foreground uppercase">
+        <p className="text-[10px] font-medium tracking-[0.12em] text-muted-foreground uppercase">
           Coleção AURA
         </p>
-        <h1 className="mt-2 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+        <h1 className="mt-2 font-heading text-2xl leading-[1.06] font-bold tracking-[-0.03em] text-foreground sm:text-3xl">
           {activeCategoryObj ? activeCategoryObj.name : "Catálogo Completo"}
         </h1>
         <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
@@ -505,7 +505,7 @@ export function CatalogClient() {
       <div className="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-10">
         {/* Sidebar Desktop */}
         <aside className="hidden lg:block" aria-label="Filtros do catálogo">
-          <div className="sticky top-28 rounded-lg border bg-card p-5">
+          <div className="sticky top-28 rounded-none border border-border bg-card p-5">
             <FilterPanel {...filterPanelProps} idPrefix="desktop" />
           </div>
         </aside>
@@ -525,13 +525,13 @@ export function CatalogClient() {
                 <SlidersHorizontal className="size-4" />
                 <span>Filtrar</span>
                 {activeFilterChips.length > 0 && (
-                  <Badge variant="secondary" className="ml-1 h-4 px-1.5 text-[10px]">
+                  <Badge variant="cobalt" className="ml-1 h-4 px-1.5 font-mono text-[10px]">
                     {activeFilterChips.length}
                   </Badge>
                 )}
               </Button>
 
-              <p className="text-sm text-muted-foreground">
+              <p className="font-mono text-xs text-muted-foreground sm:text-sm">
                 {productCountLabel}
               </p>
             </div>
@@ -571,15 +571,15 @@ export function CatalogClient() {
               {activeFilterChips.map((chip) => (
                 <Badge
                   key={chip.key}
-                  variant="secondary"
-                  className="gap-1.5 py-1 pr-1.5 pl-2.5 text-xs font-normal"
+                  variant="cobalt"
+                  className="gap-1.5 rounded-[30px] py-1 pr-1.5 pl-3 text-xs font-medium"
                 >
                   <span>{chip.label}</span>
                   <button
                     type="button"
                     onClick={chip.onRemove}
                     aria-label={`Remover filtro ${chip.label}`}
-                    className="inline-flex size-4 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-background/80 hover:text-foreground"
+                    className="inline-flex size-4 items-center justify-center rounded-[30px] text-cobalt-foreground/80 transition-colors hover:bg-cobalt-foreground/20 hover:text-cobalt-foreground"
                   >
                     <X className="size-3" />
                   </button>
@@ -597,8 +597,8 @@ export function CatalogClient() {
 
           {/* Grade de Produtos ou Estado Vazio */}
           {filteredProducts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed bg-muted/20 px-6 py-16 text-center">
-              <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <div className="flex flex-col items-center justify-center rounded-none border border-dashed border-border bg-card px-6 py-16 text-center">
+              <div className="flex size-12 items-center justify-center rounded-none border border-border bg-background text-muted-foreground">
                 <PackageSearch className="size-6" />
               </div>
               <h2 className="mt-4 text-base font-medium text-foreground">
@@ -617,7 +617,7 @@ export function CatalogClient() {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 lg:grid-cols-3">
+            <div className="grid grid-cols-2 gap-[15px] lg:grid-cols-3">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

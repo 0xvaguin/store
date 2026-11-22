@@ -47,7 +47,7 @@ export function SizeGuideModal({ modelagem }: SizeGuideModalProps) {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="overflow-x-auto rounded-lg border">
+          <div className="overflow-x-auto rounded-none border border-border">
             <table className="w-full border-collapse text-left text-xs sm:text-sm">
               <thead>
                 <tr className="border-b bg-muted/60 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
@@ -64,19 +64,19 @@ export function SizeGuideModal({ modelagem }: SizeGuideModalProps) {
                     key={row.size}
                     className="transition-colors hover:bg-muted/30"
                   >
-                    <td className="px-3 py-2.5 font-semibold text-foreground">
+                    <td className="px-3 py-2.5 font-mono font-bold text-foreground">
                       {row.size}
                     </td>
-                    <td className="px-3 py-2.5 text-muted-foreground">
+                    <td className="px-3 py-2.5 font-mono text-muted-foreground">
                       {row.bust}
                     </td>
-                    <td className="px-3 py-2.5 text-muted-foreground">
+                    <td className="px-3 py-2.5 font-mono text-muted-foreground">
                       {row.waist}
                     </td>
-                    <td className="px-3 py-2.5 text-muted-foreground">
+                    <td className="px-3 py-2.5 font-mono text-muted-foreground">
                       {row.hip}
                     </td>
-                    <td className="px-3 py-2.5 text-muted-foreground">
+                    <td className="px-3 py-2.5 font-mono text-muted-foreground">
                       {row.br}
                     </td>
                   </tr>
@@ -85,7 +85,7 @@ export function SizeGuideModal({ modelagem }: SizeGuideModalProps) {
             </table>
           </div>
 
-          <div className="rounded-lg border bg-secondary/40 p-3.5 text-xs leading-relaxed text-muted-foreground">
+          <div className="rounded-none border border-border bg-secondary/40 p-3.5 text-xs leading-relaxed text-muted-foreground">
             <p className="font-semibold text-foreground">Dica de Modelagem</p>
             <p className="mt-1">
               {modelagem

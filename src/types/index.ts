@@ -121,4 +121,12 @@ export interface StoreConfig {
   coupons: Coupon[];
   navLinks: { label: string; href: string }[];
   benefits: { title: string; subtitle: string }[];
+  theme: {
+    canvas: string;
+    surface: string;
+    ink: string;
+    border: string;
+    brandAccent: string;
+    urgencyAccent: string;
+  };
 }

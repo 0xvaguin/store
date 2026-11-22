@@ -13,7 +13,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link
               href="/"
-              className="inline-block text-xl font-semibold tracking-[0.22em] uppercase"
+              className="inline-block text-xl font-semibold tracking-[0.22em] text-brand-accent uppercase"
             >
               {storeConfig.logoText}
             </Link>
@@ -24,7 +24,7 @@ export function Footer() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-muted"
+              className="inline-flex items-center gap-2 rounded-none border border-border bg-background px-3 py-2 text-xs font-semibold transition-colors hover:bg-muted"
             >
               <MessageCircle className="size-4 text-[var(--brand-accent)]" />
               <span>Atendimento via WhatsApp</span>
@@ -99,13 +99,13 @@ export function Footer() {
               Pagamento &amp; Segurança
             </h3>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded border bg-background px-2.5 py-1 text-xs font-medium">
+              <span className="rounded-none border border-border bg-background px-2.5 py-1 text-xs font-medium">
                 Pix (5% OFF)
               </span>
-              <span className="rounded border bg-background px-2.5 py-1 text-xs font-medium">
+              <span className="rounded-none border border-border bg-background px-2.5 py-1 text-xs font-medium">
                 Cartão até {storeConfig.maxInstallments}x
               </span>
-              <span className="rounded border bg-background px-2.5 py-1 text-xs font-medium">
+              <span className="rounded-none border border-border bg-background px-2.5 py-1 text-xs font-medium">
                 Visa / Master / Elo
               </span>
             </div>

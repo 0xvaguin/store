@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Search, ShoppingBag, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { formatBRL, storeConfig } from "@/config/store.config";
 import { MOCK_PRODUCTS } from "@/data/mock-products";
 import { selectCartTotalItems, useCartStore } from "@/store/use-cart";
@@ -15,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 export function Navbar() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -71,7 +74,7 @@ export function Navbar() {
 
           <Link
             href="/"
-            className="text-xl font-semibold tracking-[0.22em] text-foreground uppercase transition-opacity hover:opacity-80 sm:text-2xl"
+            className="text-xl font-semibold tracking-[0.22em] text-brand-accent uppercase transition-opacity hover:opacity-80 sm:text-2xl"
           >
             {storeConfig.logoText}
           </Link>
@@ -82,15 +85,25 @@ export function Navbar() {
           aria-label="Navegação principal"
           className="hidden items-center gap-5 md:flex lg:gap-7"
         >
-          {storeConfig.navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-xs font-medium tracking-[0.1em] text-muted-foreground uppercase transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {storeConfig.navLinks.map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href === "/produtos" && pathname.startsWith("/produtos"));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-xs font-semibold tracking-[0.1em] uppercase transition-colors",
+                  isActive
+                    ? "border-b-2 border-brand-accent pb-0.5 text-brand-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Actions: Live Search + Cart */}
@@ -135,7 +148,7 @@ export function Navbar() {
 
             {/* Live Search Dropdown */}
             {searchOpen && (
-              <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-none border bg-popover p-3 shadow-lg sm:w-80">
+              <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-none border border-border bg-background p-3 sm:w-80">
                 <div className="mb-2 md:hidden">
                   <Input
                     type="search"
@@ -174,21 +187,21 @@ export function Navbar() {
                           setSearchOpen(false);
                           setSearchQuery("");
                         }}
-                        className="flex items-center gap-3 rounded-md p-1.5 transition-colors hover:bg-muted"
+                        className="flex items-center gap-3 rounded-none p-1.5 transition-colors hover:bg-muted"
                       >
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="size-12 rounded object-cover"
+                          className="size-12 rounded-none object-cover"
                         />
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-xs font-medium text-foreground">
+                          <p className="truncate text-xs font-semibold text-foreground">
                             {product.name}
                           </p>
                           <p className="text-[11px] text-muted-foreground">
                             {product.categoryName}
                           </p>
-                          <p className="text-xs font-semibold text-foreground">
+                          <p className="font-mono text-xs font-bold text-foreground">
                             {formatBRL(product.price)}
                           </p>
                         </div>
@@ -213,15 +226,15 @@ export function Navbar() {
             onClick={() => setCartOpen(true)}
             aria-label={`Abrir sacola de compras (${totalItems} itens)`}
             data-testid="navbar-cart-button"
-            className="relative inline-flex h-9 items-center gap-2 rounded-none border border-transparent px-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            className="relative inline-flex h-9 items-center gap-2 rounded-none border border-transparent px-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
           >
             <ShoppingBag className="size-5" />
-            <span className="hidden text-xs font-medium tracking-wider uppercase md:inline">
+            <span className="hidden text-xs font-semibold tracking-wider uppercase md:inline">
               Sacola
             </span>
             <span
               data-testid="navbar-cart-count"
-              className="inline-flex min-w-5 items-center justify-center rounded-none bg-primary px-1.5 py-0.5 text-[10px] font-medium leading-none text-primary-foreground"
+              className="inline-flex min-w-5 items-center justify-center rounded-none bg-primary px-1.5 py-0.5 font-mono text-[10px] font-bold leading-none text-primary-foreground"
             >
               {totalItems}
             </span>
@@ -233,21 +246,29 @@ export function Navbar() {
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
         <SheetContent side="left" className="w-[82vw] max-w-xs">
           <SheetHeader className="border-b pb-4">
-            <SheetTitle className="tracking-[0.2em] uppercase">
+            <SheetTitle className="tracking-[0.2em] text-brand-accent uppercase">
               {storeConfig.logoText}
             </SheetTitle>
           </SheetHeader>
           <nav className="flex flex-col gap-1 p-4">
-            {storeConfig.navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {storeConfig.navLinks.map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href === "/produtos" && pathname.startsWith("/produtos"));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    "rounded-none px-3 py-2.5 text-sm font-semibold transition-colors hover:bg-muted",
+                    isActive ? "border-l-2 border-brand-accent text-brand-accent" : "text-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
           <div className="mt-auto border-t p-4 text-xs text-muted-foreground">
             <p className="font-medium text-foreground">Atendimento WhatsApp</p>

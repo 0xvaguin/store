@@ -7,11 +7,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --color-brand-accent: var(--brand-accent);
   --color-brand-accent-foreground: var(--brand-accent-foreground);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-foreground: var(--cobalt-foreground);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -41,54 +43,56 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+  --radius-pill: 30px;
 }
 
 /* ============================================================================
- * White-Label Tenant Theme Tokens
- * Customize these CSS variables per store deployment.
+ * White-Label Tenant Theme Tokens — HNST Studio x Zellerfeld
  * ============================================================================ */
 :root {
-  --background: oklch(0.99 0.004 80);
-  --foreground: oklch(0.16 0.01 60);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.01 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.01 60);
-  --primary: oklch(0.18 0.012 55);
-  --primary-foreground: oklch(0.985 0.004 80);
-  --brand-accent: oklch(0.54 0.12 42);
-  --brand-accent-foreground: oklch(0.985 0.004 80);
-  --secondary: oklch(0.955 0.008 75);
-  --secondary-foreground: oklch(0.2 0.01 55);
-  --muted: oklch(0.95 0.006 75);
-  --muted-foreground: oklch(0.48 0.01 60);
-  --accent: oklch(0.94 0.012 65);
-  --accent-foreground: oklch(0.18 0.012 55);
-  --destructive: oklch(0.56 0.21 27);
-  --border: oklch(0.9 0.008 75);
-  --input: oklch(0.88 0.008 75);
-  --ring: oklch(0.54 0.12 42);
+  --background: #F9F6F2;
+  --foreground: #0E0E0E;
+  --card: #ECECED;
+  --card-foreground: #0E0E0E;
+  --popover: #F9F6F2;
+  --popover-foreground: #0E0E0E;
+  --primary: #0E0E0E;
+  --primary-foreground: #F9F6F2;
+  --brand-accent: #892500;
+  --brand-accent-foreground: #F9F6F2;
+  --cobalt: #000aff;
+  --cobalt-foreground: #F9F6F2;
+  --secondary: #ECECED;
+  --secondary-foreground: #0E0E0E;
+  --muted: #ECECED;
+  --muted-foreground: #525252;
+  --accent: #ECECED;
+  --accent-foreground: #0E0E0E;
+  --destructive: #B91C1C;
+  --border: #868686;
+  --input: #868686;
+  --ring: #892500;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0px;
-  --sidebar: oklch(0.98 0.004 80);
-  --sidebar-foreground: oklch(0.16 0.01 60);
-  --sidebar-primary: oklch(0.18 0.012 55);
-  --sidebar-primary-foreground: oklch(0.985 0.004 80);
-  --sidebar-accent: oklch(0.94 0.012 65);
-  --sidebar-accent-foreground: oklch(0.18 0.012 55);
-  --sidebar-border: oklch(0.9 0.008 75);
-  --sidebar-ring: oklch(0.54 0.12 42);
+  --sidebar: #F9F6F2;
+  --sidebar-foreground: #0E0E0E;
+  --sidebar-primary: #0E0E0E;
+  --sidebar-primary-foreground: #F9F6F2;
+  --sidebar-accent: #ECECED;
+  --sidebar-accent-foreground: #0E0E0E;
+  --sidebar-border: #868686;
+  --sidebar-ring: #892500;
 }
 
 .dark {
@@ -102,6 +106,8 @@
   --primary-foreground: oklch(0.16 0.01 60);
   --brand-accent: oklch(0.66 0.13 42);
   --brand-accent-foreground: oklch(0.16 0.01 60);
+  --cobalt: #3B47FF;
+  --cobalt-foreground: #F9F6F2;
   --secondary: oklch(0.25 0.008 55);
   --secondary-foreground: oklch(0.98 0.004 80);
   --muted: oklch(0.25 0.008 55);
@@ -122,14 +128,42 @@
   --sidebar-ring: oklch(0.66 0.13 42);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor,
+  html.custom-cursor * {
+    cursor: none !important;
+  }
+
+  /* Preserva o cursor de texto nos campos de busca e checkout */
+  html.custom-cursor input,
+  html.custom-cursor textarea {
+    cursor: text !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+    scroll-behavior: auto;
+  }
+  body {
+    @apply bg-background text-foreground tracking-normal leading-[1.55];
+  }
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  summary {
+    touch-action: manipulation;
   }
 }

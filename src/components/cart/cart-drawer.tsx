@@ -69,12 +69,15 @@ export function CartDrawer() {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent
         side="right"
+        data-lenis-prevent
         className="flex w-full flex-col gap-0 p-0 sm:max-w-md"
       >
         <SheetHeader className="border-b px-5 py-4">
           <SheetTitle className="flex items-center gap-2 text-base font-semibold tracking-wide uppercase">
             <ShoppingBag className="size-4" />
-            <span>Sua Sacola ({totalItems})</span>
+            <span>
+              Sua Sacola (<span className="font-mono">{totalItems}</span>)
+            </span>
           </SheetTitle>
         </SheetHeader>
 
@@ -85,7 +88,7 @@ export function CartDrawer() {
             {remainingForFreeShipping > 0 ? (
               <span>
                 Faltam{" "}
-                <strong className="text-foreground">
+                <strong className="font-mono text-foreground">
                   {formatBRL(remainingForFreeShipping)}
                 </strong>{" "}
                 para você ganhar <strong>Frete Grátis</strong>!
@@ -97,7 +100,7 @@ export function CartDrawer() {
               </span>
             )}
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-border">
+          <div className="h-1.5 w-full overflow-hidden rounded-none bg-border">
             <div
               className="h-full bg-[var(--brand-accent)] transition-all duration-300"
               style={{ width: `${shippingProgress}%` }}
@@ -106,13 +109,16 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div
+          data-lenis-prevent
+          className="flex-1 overflow-y-auto px-5 py-4"
+        >
           {items.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center py-12 text-center">
-              <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-muted">
+              <div className="mb-4 flex size-14 items-center justify-center rounded-none border border-border bg-muted">
                 <ShoppingBag className="size-6 text-muted-foreground" />
               </div>
-              <p className="text-sm font-medium text-foreground">
+              <p className="text-sm font-semibold text-foreground">
                 Sua sacola está vazia
               </p>
               <p className="mt-1 max-w-xs text-xs text-muted-foreground">
@@ -134,7 +140,7 @@ export function CartDrawer() {
                   <Link
                     href={`/produtos/${item.slug}`}
                     onClick={() => setIsOpen(false)}
-                    className="h-24 w-20 shrink-0 overflow-hidden rounded-md bg-muted"
+                    className="h-24 w-20 shrink-0 overflow-hidden rounded-none border border-border bg-muted"
                   >
                     <img
                       src={item.image}
@@ -149,7 +155,7 @@ export function CartDrawer() {
                         <Link
                           href={`/produtos/${item.slug}`}
                           onClick={() => setIsOpen(false)}
-                          className="line-clamp-1 text-sm font-medium text-foreground hover:underline"
+                          className="line-clamp-1 text-sm font-semibold text-foreground hover:underline"
                         >
                           {item.name}
                         </Link>
@@ -173,7 +179,7 @@ export function CartDrawer() {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between">
-                      <div className="inline-flex items-center rounded-md border">
+                      <div className="inline-flex items-center rounded-none border border-border">
                         <button
                           type="button"
                           onClick={() =>
@@ -184,7 +190,7 @@ export function CartDrawer() {
                         >
                           <Minus className="size-3.5" />
                         </button>
-                        <span className="min-w-7 text-center text-xs font-medium">
+                        <span className="min-w-7 text-center font-mono text-xs font-bold">
                           {item.quantity}
                         </span>
                         <button
@@ -201,7 +207,7 @@ export function CartDrawer() {
                       </div>
 
                       <div className="text-right">
-                        <p className="text-sm font-semibold text-foreground">
+                        <p className="font-mono text-sm font-bold text-foreground">
                           {formatBRL(item.price * item.quantity)}
                         </p>
                       </div>
@@ -219,7 +225,7 @@ export function CartDrawer() {
             {/* Coupon Form */}
             <div className="mb-3">
               {couponCode ? (
-                <div className="flex items-center justify-between rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs">
+                <div className="flex items-center justify-between rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-xs">
                   <div className="flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400">
                     <Tag className="size-3.5" />
                     <span>
@@ -271,21 +277,28 @@ export function CartDrawer() {
             <div className="space-y-1.5 text-sm">
               <div className="flex justify-between text-muted-foreground">
                 <span>Subtotal</span>
-                <span>{formatBRL(subtotal)}</span>
+                <span className="font-mono text-foreground">
+                  {formatBRL(subtotal)}
+                </span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-emerald-700 dark:text-emerald-400">
                   <span>Desconto ({couponCode})</span>
-                  <span>-{formatBRL(discount)}</span>
+                  <span className="font-mono">-{formatBRL(discount)}</span>
                 </div>
               )}
               <div className="flex justify-between border-t pt-2 font-semibold text-foreground">
                 <span>Total estimado</span>
-                <span>{formatBRL(totalAfterDiscount)}</span>
+                <span className="font-mono font-bold">
+                  {formatBRL(totalAfterDiscount)}
+                </span>
               </div>
               <p className="text-right text-xs font-medium text-[var(--brand-accent)]">
-                ou {formatBRL(pixTotal)} no Pix ({storeConfig.pixDiscountPercent}
-                % OFF)
+                ou{" "}
+                <span className="font-mono font-bold">
+                  {formatBRL(pixTotal)}
+                </span>{" "}
+                no Pix ({storeConfig.pixDiscountPercent}% OFF)
               </p>
             </div>
 
@@ -293,7 +306,7 @@ export function CartDrawer() {
               href="/checkout"
               onClick={() => setIsOpen(false)}
               className={cn(
-                buttonVariants({ size: "lg" }),
+                buttonVariants({ variant: "cobalt", size: "lg" }),
                 "mt-2 h-11 w-full text-xs font-semibold tracking-widest uppercase"
               )}
             >

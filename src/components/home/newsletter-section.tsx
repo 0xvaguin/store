@@ -41,7 +41,7 @@ export function NewsletterSection() {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between rounded-none border bg-card p-6 sm:p-8 lg:p-10">
+    <div className="flex h-full flex-col justify-between rounded-none border border-border bg-card p-6 sm:p-10">
       <div className="space-y-4">
         <p className="text-[10px] font-medium tracking-[0.2em] text-muted-foreground uppercase">
           Lista Privada AURA

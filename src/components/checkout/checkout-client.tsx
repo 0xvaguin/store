@@ -244,7 +244,7 @@ function StepBadge({
     >
       <span
         className={cn(
-          "flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-colors",
+          "flex size-7 shrink-0 items-center justify-center rounded-none border text-xs font-semibold transition-colors",
           isActive &&
             "border-primary bg-primary text-primary-foreground",
           completed &&
@@ -300,7 +300,7 @@ function MockPixQrSvg() {
   return (
     <svg
       viewBox={`0 0 ${size} ${size}`}
-      className="size-40 rounded-lg border bg-white p-3 text-zinc-900"
+      className="size-40 rounded-none border bg-background p-3 text-foreground"
       role="img"
       aria-label="QR Code Pix para pagamento"
     >
@@ -698,11 +698,11 @@ export function CheckoutClient() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-7">
-            <div className="h-8 w-56 animate-pulse rounded-md bg-muted" />
-            <div className="h-64 animate-pulse rounded-xl border bg-card" />
+            <div className="h-8 w-56 animate-pulse rounded-none bg-muted" />
+            <div className="h-64 animate-pulse rounded-none border bg-card" />
           </div>
           <div className="lg:col-span-5">
-            <div className="h-80 animate-pulse rounded-xl border bg-card" />
+            <div className="h-80 animate-pulse rounded-none border bg-card" />
           </div>
         </div>
       </div>
@@ -713,7 +713,7 @@ export function CheckoutClient() {
   if (items.length === 0 && !confirmedOrder) {
     return (
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-        <div className="mb-5 flex size-16 items-center justify-center rounded-full bg-muted">
+        <div className="mb-5 flex size-16 items-center justify-center rounded-none border bg-muted">
           <ShoppingBag className="size-7 text-muted-foreground" />
         </div>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -745,9 +745,9 @@ export function CheckoutClient() {
 
     return (
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-16">
-        <div className="rounded-2xl border bg-card p-6 shadow-xs sm:p-10">
+        <div className="rounded-none border bg-card p-6 sm:p-10">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
+            <div className="mb-4 flex size-14 items-center justify-center rounded-none bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
               <CheckCircle2 className="size-8" />
             </div>
             <p className="text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
@@ -775,7 +775,7 @@ export function CheckoutClient() {
 
           {/* Pix QR & Copy-Paste Box */}
           {confirmedOrder.paymentMethod === "pix" && (
-            <div className="mt-8 rounded-xl border bg-secondary/35 p-5 sm:p-6">
+            <div className="mt-8 rounded-none border bg-secondary/35 p-5 sm:p-6">
               <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
                 <div className="shrink-0">
                   <MockPixQrSvg />
@@ -791,7 +791,7 @@ export function CheckoutClient() {
                     Escaneie o QR Code no aplicativo do seu banco ou copie o
                     código Pix Copia e Cola abaixo. A aprovação é imediata.
                   </p>
-                  <div className="rounded-lg border bg-background p-2.5 font-mono text-[11px] break-all text-muted-foreground">
+                  <div className="rounded-none border bg-background p-2.5 font-mono text-[11px] break-all text-muted-foreground">
                     {pixCode}
                   </div>
                   <Button
@@ -809,7 +809,7 @@ export function CheckoutClient() {
 
           {/* Customer & Shipping Summary */}
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border p-4">
+            <div className="rounded-none border p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                 <User className="size-3.5" />
                 <span>Dados do Cliente</span>
@@ -828,7 +828,7 @@ export function CheckoutClient() {
               </p>
             </div>
 
-            <div className="rounded-xl border p-4">
+            <div className="rounded-none border p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                 <Truck className="size-3.5" />
                 <span>Entrega ({confirmedOrder.shipping.service})</span>
@@ -854,7 +854,7 @@ export function CheckoutClient() {
           </div>
 
           {/* Items & Totals */}
-          <div className="mt-6 rounded-xl border p-4 sm:p-5">
+          <div className="mt-6 rounded-none border p-4 sm:p-5">
             <div className="mb-3 flex items-center gap-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
               <Package className="size-3.5" />
               <span>Itens do Pedido ({confirmedOrder.items.length})</span>
@@ -869,7 +869,7 @@ export function CheckoutClient() {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="size-12 shrink-0 rounded-md bg-muted object-cover"
+                      className="size-12 shrink-0 rounded-none bg-muted object-cover"
                     />
                     <div className="min-w-0">
                       <p className="truncate font-medium">{item.name}</p>
@@ -956,7 +956,7 @@ export function CheckoutClient() {
   // Shared Order Summary panel renderer
   const summaryPanel = (
     <div className="space-y-4">
-      <div className="rounded-xl border bg-card p-5 shadow-xs">
+      <div className="rounded-none border bg-card p-5">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-sm font-semibold tracking-wide uppercase">
             Resumo do Pedido
@@ -970,13 +970,13 @@ export function CheckoutClient() {
         <ul className="max-h-72 divide-y overflow-y-auto pr-1">
           {items.map((item) => (
             <li key={item.key} className="flex gap-3 py-3 first:pt-0">
-              <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-md bg-muted">
+              <div className="relative h-16 w-14 shrink-0 overflow-hidden rounded-none bg-muted">
                 <img
                   src={item.image}
                   alt={item.name}
                   className="h-full w-full object-cover"
                 />
-                <span className="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
+                <span className="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-none bg-primary font-mono text-[10px] font-semibold text-primary-foreground">
                   {item.quantity}
                 </span>
               </div>
@@ -1010,7 +1010,7 @@ export function CheckoutClient() {
         {/* Coupon Input / Active Coupon */}
         <div className="mt-4 border-t pt-4">
           {couponCode ? (
-            <div className="flex items-center justify-between rounded-lg border border-emerald-600/30 bg-emerald-500/10 px-3 py-2">
+            <div className="flex items-center justify-between rounded-none border border-emerald-600/30 bg-emerald-500/10 px-3 py-2">
               <div className="flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400">
                 <Tag className="size-3.5" />
                 <span>
@@ -1025,7 +1025,7 @@ export function CheckoutClient() {
                   toast.info("Cupom removido.");
                 }}
                 aria-label="Remover cupom"
-                className="rounded p-1 text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+                className="rounded-none p-1 text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
               >
                 <X className="size-3.5" />
               </button>
@@ -1130,7 +1130,7 @@ export function CheckoutClient() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 rounded-xl border bg-secondary/35 px-4 py-3 text-xs text-muted-foreground">
+      <div className="flex items-center justify-center gap-2 rounded-none border bg-secondary/35 px-4 py-3 text-xs text-muted-foreground">
         <ShieldCheck className="size-4 shrink-0 text-emerald-700 dark:text-emerald-400" />
         <span>Ambiente protegido com criptografia SSL</span>
       </div>
@@ -1190,7 +1190,7 @@ export function CheckoutClient() {
         <button
           type="button"
           onClick={() => setMobileSummaryOpen((prev) => !prev)}
-          className="flex w-full items-center justify-between rounded-xl border bg-card px-4 py-3.5 text-left shadow-xs"
+          className="flex w-full items-center justify-between rounded-none border bg-card px-4 py-3.5 text-left"
         >
           <div className="flex items-center gap-2.5">
             <ShoppingBag className="size-4 text-muted-foreground" />
@@ -1218,12 +1218,12 @@ export function CheckoutClient() {
         {/* Left Column: 3-Step Progressive Form */}
         <div className="space-y-5 lg:col-span-7">
           {/* STEP 1: DADOS PESSOAIS */}
-          <section className="rounded-xl border bg-card p-5 shadow-xs sm:p-6">
+          <section className="rounded-none border bg-card p-5 sm:p-6">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <span
                   className={cn(
-                    "flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
+                    "flex size-7 shrink-0 items-center justify-center rounded-none text-xs font-semibold",
                     completedSteps.step1 && activeStep !== 1
                       ? "bg-emerald-600 text-white"
                       : "bg-primary text-primary-foreground"
@@ -1256,7 +1256,7 @@ export function CheckoutClient() {
             </div>
 
             {activeStep !== 1 && completedSteps.step1 ? (
-              <div className="mt-4 rounded-lg bg-secondary/40 px-4 py-3 text-xs text-muted-foreground sm:text-sm">
+              <div className="mt-4 rounded-none bg-secondary/40 px-4 py-3 text-xs text-muted-foreground sm:text-sm">
                 <p className="font-medium text-foreground">
                   {customer.fullName}
                 </p>
@@ -1377,7 +1377,7 @@ export function CheckoutClient() {
           {/* STEP 2: ENTREGA */}
           <section
             className={cn(
-              "rounded-xl border bg-card p-5 shadow-xs transition-opacity sm:p-6",
+              "rounded-none border bg-card p-5 transition-opacity sm:p-6",
               activeStep < 2 && !completedSteps.step2 && "opacity-60"
             )}
           >
@@ -1385,7 +1385,7 @@ export function CheckoutClient() {
               <div className="flex items-center gap-3">
                 <span
                   className={cn(
-                    "flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
+                    "flex size-7 shrink-0 items-center justify-center rounded-none text-xs font-semibold",
                     completedSteps.step2 && activeStep !== 2
                       ? "bg-emerald-600 text-white"
                       : activeStep === 2
@@ -1420,7 +1420,7 @@ export function CheckoutClient() {
             </div>
 
             {activeStep !== 2 && completedSteps.step2 && selectedShipping ? (
-              <div className="mt-4 rounded-lg bg-secondary/40 px-4 py-3 text-xs text-muted-foreground sm:text-sm">
+              <div className="mt-4 rounded-none bg-secondary/40 px-4 py-3 text-xs text-muted-foreground sm:text-sm">
                 <p className="font-medium text-foreground">
                   {address.street}, {address.number}
                   {address.complement ? ` — ${address.complement}` : ""}
@@ -1492,23 +1492,23 @@ export function CheckoutClient() {
                               }));
                             }}
                             className={cn(
-                              "flex items-start justify-between gap-3 rounded-xl border p-3.5 text-left transition-all",
+                              "flex items-start justify-between gap-3 rounded-none border p-3.5 text-left transition-all",
                               isSelected
-                                ? "border-primary bg-secondary/50 ring-1 ring-primary"
+                                ? "border-primary bg-secondary/50"
                                 : "hover:border-foreground/30"
                             )}
                           >
                             <div className="flex items-start gap-2.5">
                               <span
                                 className={cn(
-                                  "mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full border",
+                                  "mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-none border",
                                   isSelected
                                     ? "border-primary bg-primary"
                                     : "border-muted-foreground/40"
                                 )}
                               >
                                 {isSelected && (
-                                  <span className="size-1.5 rounded-full bg-primary-foreground" />
+                                  <span className="size-1.5 rounded-none bg-primary-foreground" />
                                 )}
                               </span>
                               <div>
@@ -1725,14 +1725,14 @@ export function CheckoutClient() {
           {/* STEP 3: PAGAMENTO */}
           <section
             className={cn(
-              "rounded-xl border bg-card p-5 shadow-xs transition-opacity sm:p-6",
+              "rounded-none border bg-card p-5 transition-opacity sm:p-6",
               activeStep < 3 && "opacity-60"
             )}
           >
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  "flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
+                  "flex size-7 shrink-0 items-center justify-center rounded-none text-xs font-semibold",
                   activeStep === 3
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground"
@@ -1759,9 +1759,9 @@ export function CheckoutClient() {
                       setStep3Errors({});
                     }}
                     className={cn(
-                      "flex flex-col justify-between rounded-xl border p-4 text-left transition-all",
+                      "flex flex-col justify-between rounded-none border p-4 text-left transition-all",
                       paymentMethod === "pix"
-                        ? "border-primary bg-secondary/50 ring-1 ring-primary"
+                        ? "border-primary bg-secondary/50"
                         : "hover:border-foreground/30"
                     )}
                   >
@@ -1783,9 +1783,9 @@ export function CheckoutClient() {
                     type="button"
                     onClick={() => setPaymentMethod("credit_card")}
                     className={cn(
-                      "flex flex-col justify-between rounded-xl border p-4 text-left transition-all",
+                      "flex flex-col justify-between rounded-none border p-4 text-left transition-all",
                       paymentMethod === "credit_card"
-                        ? "border-primary bg-secondary/50 ring-1 ring-primary"
+                        ? "border-primary bg-secondary/50"
                         : "hover:border-foreground/30"
                     )}
                   >
@@ -1808,7 +1808,7 @@ export function CheckoutClient() {
 
                 {/* Pix Details */}
                 {paymentMethod === "pix" ? (
-                  <div className="rounded-xl border border-emerald-600/25 bg-emerald-500/8 p-4">
+                  <div className="rounded-none border border-emerald-600/25 bg-emerald-500/8 p-4">
                     <div className="flex items-start gap-3">
                       <Sparkles className="mt-0.5 size-4 shrink-0 text-emerald-700 dark:text-emerald-400" />
                       <div className="space-y-1 text-xs leading-relaxed">
@@ -1827,7 +1827,7 @@ export function CheckoutClient() {
                   </div>
                 ) : (
                   /* Credit Card Fields */
-                  <div className="space-y-4 rounded-xl border bg-secondary/20 p-4">
+                  <div className="space-y-4 rounded-none border bg-secondary/20 p-4">
                     <div>
                       <label
                         htmlFor="cardNumber"

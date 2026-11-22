@@ -12,6 +12,9 @@ export async function generateStaticParams() {
   return MOCK_PRODUCTS.map((p) => ({ slug: p.slug }));
 }
 
+// shortcut: desativa instant shell enquanto usa mock; envolver await params em <Suspense> ao ligar o Supabase
+export const instant = false;
+
 export async function generateMetadata({
   params,
 }: PageProps<"/produtos/[slug]">): Promise<Metadata> {
